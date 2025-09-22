@@ -1,13 +1,758 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sterling Financial Group - Premium Financial Services</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+        }
+        .expandable-content.expanded {
+            max-height: 2000px;
+            opacity: 1;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+        <!-- Header -->
+        <header class="bg-white shadow-md sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center space-x-3">
+                        <i data-lucide="building-2" class="w-8 h-8 text-blue-600"></i>
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Sterling Financial Group</h1>
+                            <p class="text-sm text-gray-500">Premium Financial Services</p>
+                        </div>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#overview" class="text-gray-700 hover:text-blue-600 transition-colors">Overview</a>
+                        <a href="#businesses" class="text-gray-700 hover:text-blue-600 transition-colors">Portfolio</a>
+                        <a href="#banking" class="text-gray-700 hover:text-blue-600 transition-colors">Banking</a>
+                        <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                        Building Financial Excellence
+                    </h2>
+                    <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                        A diversified financial services company delivering exceptional results across multiple business sectors
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-8 text-center">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                            <div class="text-3xl font-bold">$27.1M</div>
+                            <div class="text-blue-200">Annual Revenue</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                            <div class="text-3xl font-bold">$10.6M</div>
+                            <div class="text-blue-200">Annual Profit</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                            <div class="text-3xl font-bold">3</div>
+                            <div class="text-blue-200">Business Units</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+            
+            <!-- Company Financial Overview -->
+            <section id="overview">
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <button onclick="toggleSection('company-overview')" class="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50 rounded-t-xl transition-colors duration-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="trending-up" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="text-xl font-semibold text-gray-800">Company Financial Overview</h3>
+                        </div>
+                        <i data-lucide="chevron-down" class="text-gray-500 w-5 h-5 chevron" id="company-overview-chevron"></i>
+                    </button>
+                    
+                    <div id="company-overview" class="expandable-content">
+                        <div class="p-6 pt-0 border-t border-gray-100">
+                            <div class="space-y-4">
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <button onclick="showTab('company', 'daily')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200" data-tab="daily">Daily</button>
+                                    <button onclick="showTab('company', 'monthly')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-600 text-white shadow-md" data-tab="monthly">Monthly</button>
+                                    <button onclick="showTab('company', 'annual')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200" data-tab="annual">Annual</button>
+                                </div>
+
+                                <div id="company-daily" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                        <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                        <div class="text-2xl font-bold text-green-800">$82,100</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                        <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                        <div class="text-2xl font-bold text-blue-800">$78,900</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                        <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                        <div class="text-2xl font-bold text-purple-800">$33,700</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                        <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                        <div class="text-2xl font-bold text-orange-800">$45,200</div>
+                                    </div>
+                                </div>
+
+                                <div id="company-monthly" class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                        <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                        <div class="text-2xl font-bold text-green-800">$2.3M</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                        <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                        <div class="text-2xl font-bold text-blue-800">$2.1M</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                        <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                        <div class="text-2xl font-bold text-purple-800">$890K</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                        <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                        <div class="text-2xl font-bold text-orange-800">$1.2M</div>
+                                    </div>
+                                </div>
+
+                                <div id="company-annual" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                        <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                        <div class="text-2xl font-bold text-green-800">$27.1M</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                        <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                        <div class="text-2xl font-bold text-blue-800">$24.8M</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                        <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                        <div class="text-2xl font-bold text-purple-800">$10.6M</div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                        <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                        <div class="text-2xl font-bold text-orange-800">$14.2M</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Business Portfolio -->
+            <section id="businesses">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Business Portfolio</h2>
+                <div class="space-y-6">
+                    
+                    <!-- Sterling Tech Solutions -->
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                        <button onclick="toggleSection('tech-business')" class="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50 rounded-t-xl transition-colors duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="building-2" class="w-6 h-6 text-blue-600"></i>
+                                <h3 class="text-xl font-semibold text-gray-800">Sterling Tech Solutions</h3>
+                            </div>
+                            <i data-lucide="chevron-down" class="text-gray-500 w-5 h-5 chevron" id="tech-business-chevron"></i>
+                        </button>
+                        
+                        <div id="tech-business" class="expandable-content">
+                            <div class="p-6 pt-0 border-t border-gray-100">
+                                <div class="mb-4">
+                                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                                        Technology Services
+                                    </span>
+                                </div>
+                                <p class="text-gray-600 mb-6">Leading provider of cloud infrastructure and software development services</p>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <button onclick="showTab('tech', 'daily')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200" data-tab="daily">Daily</button>
+                                        <button onclick="showTab('tech', 'monthly')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-600 text-white shadow-md" data-tab="monthly">Monthly</button>
+                                        <button onclick="showTab('tech', 'annual')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200" data-tab="annual">Annual</button>
+                                    </div>
+
+                                    <div id="tech-daily" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$19,800</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$18,200</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$5,700</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$12,500</div>
+                                        </div>
+                                    </div>
+
+                                    <div id="tech-monthly" class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$594K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$546K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$171K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$375K</div>
+                                        </div>
+                                    </div>
+
+                                    <div id="tech-annual" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$7.1M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$6.6M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$2.1M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$4.5M</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sterling Real Estate -->
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                        <button onclick="toggleSection('real-estate-business')" class="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50 rounded-t-xl transition-colors duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="building-2" class="w-6 h-6 text-blue-600"></i>
+                                <h3 class="text-xl font-semibold text-gray-800">Sterling Real Estate</h3>
+                            </div>
+                            <i data-lucide="chevron-down" class="text-gray-500 w-5 h-5 chevron" id="real-estate-business-chevron"></i>
+                        </button>
+                        
+                        <div id="real-estate-business" class="expandable-content">
+                            <div class="p-6 pt-0 border-t border-gray-100">
+                                <div class="mb-4">
+                                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                                        Property Management
+                                    </span>
+                                </div>
+                                <p class="text-gray-600 mb-6">Premium commercial and residential property management and development</p>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <button onclick="showTab('realestate', 'daily')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200" data-tab="daily">Daily</button>
+                                        <button onclick="showTab('realestate', 'monthly')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-600 text-white shadow-md" data-tab="monthly">Monthly</button>
+                                        <button onclick="showTab('realestate', 'annual')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200" data-tab="annual">Annual</button>
+                                    </div>
+
+                                    <div id="realestate-daily" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$16,200</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$15,400</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$6,500</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$8,900</div>
+                                        </div>
+                                    </div>
+
+                                    <div id="realestate-monthly" class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$486K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$462K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$195K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$267K</div>
+                                        </div>
+                                    </div>
+
+                                    <div id="realestate-annual" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$5.8M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$5.5M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$2.3M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$3.2M</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sterling Consulting -->
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                        <button onclick="toggleSection('consulting-business')" class="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50 rounded-t-xl transition-colors duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="building-2" class="w-6 h-6 text-blue-600"></i>
+                                <h3 class="text-xl font-semibold text-gray-800">Sterling Consulting</h3>
+                            </div>
+                            <i data-lucide="chevron-down" class="text-gray-500 w-5 h-5 chevron" id="consulting-business-chevron"></i>
+                        </button>
+                        
+                        <div id="consulting-business" class="expandable-content">
+                            <div class="p-6 pt-0 border-t border-gray-100">
+                                <div class="mb-4">
+                                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                                        Business Consulting
+                                    </span>
+                                </div>
+                                <p class="text-gray-600 mb-6">Strategic business consulting and financial advisory services</p>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <button onclick="showTab('consulting', 'daily')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200" data-tab="daily">Daily</button>
+                                        <button onclick="showTab('consulting', 'monthly')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-600 text-white shadow-md" data-tab="monthly">Monthly</button>
+                                        <button onclick="showTab('consulting', 'annual')" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200" data-tab="annual">Annual</button>
+                                    </div>
+
+                                    <div id="consulting-daily" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$13,500</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$12,800</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$6,600</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$6,200</div>
+                                        </div>
+                                    </div>
+
+                                    <div id="consulting-monthly" class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$405K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$384K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$198K</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$186K</div>
+                                        </div>
+                                    </div>
+
+                                    <div id="consulting-annual" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                                            <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Revenue</div>
+                                            <div class="text-2xl font-bold text-green-800">$4.9M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                                            <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Earnings</div>
+                                            <div class="text-2xl font-bold text-blue-800">$4.6M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                                            <div class="text-sm font-medium text-purple-600 uppercase tracking-wide">Profit</div>
+                                            <div class="text-2xl font-bold text-purple-800">$2.4M</div>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
+                                            <div class="text-sm font-medium text-orange-600 uppercase tracking-wide">Expenditure</div>
+                                            <div class="text-2xl font-bold text-orange-800">$2.2M</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Banking Section -->
+            <section id="banking">
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <button onclick="toggleSection('banking-accounts')" class="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50 rounded-t-xl transition-colors duration-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="piggy-bank" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="text-xl font-semibold text-gray-800">Banking & Accounts</h3>
+                        </div>
+                        <i data-lucide="chevron-down" class="text-gray-500 w-5 h-5 chevron" id="banking-accounts-chevron"></i>
+                    </button>
+                    
+                    <div id="banking-accounts" class="expandable-content">
+                        <div class="p-6 pt-0 border-t border-gray-100">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border">
+                                    <h4 class="font-semibold text-lg text-gray-800 mb-2">Chase Business</h4>
+                                    <p class="text-gray-600 mb-3">Primary Operating</p>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Balance</div>
+                                            <div class="text-xl font-bold text-green-600">$2.4M</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Interest Rate</div>
+                                            <div class="text-lg font-semibold text-blue-600">0.85%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border">
+                                    <h4 class="font-semibold text-lg text-gray-800 mb-2">Wells Fargo</h4>
+                                    <p class="text-gray-600 mb-3">Reserve Fund</p>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Balance</div>
+                                            <div class="text-xl font-bold text-green-600">$890K</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Interest Rate</div>
+                                            <div class="text-lg font-semibold text-blue-600">1.2%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border">
+                                    <h4 class="font-semibold text-lg text-gray-800 mb-2">Bank of America</h4>
+                                    <p class="text-gray-600 mb-3">Payroll Account</p>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Balance</div>
+                                            <div class="text-xl font-bold text-green-600">$320K</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Interest Rate</div>
+                                            <div class="text-lg font-semibold text-blue-600">0.65%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border">
+                                    <h4 class="font-semibold text-lg text-gray-800 mb-2">Silicon Valley Bank</h4>
+                                    <p class="text-gray-600 mb-3">Investment Account</p>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Balance</div>
+                                            <div class="text-xl font-bold text-green-600">$1.8M</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Interest Rate</div>
+                                            <div class="text-lg font-semibold text-blue-600">2.1%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loans Section -->
+            <section>
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <button onclick="toggleSection('loans-section')" class="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50 rounded-t-xl transition-colors duration-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="credit-card" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="text-xl font-semibold text-gray-800">Loans & Credit Facilities</h3>
+                        </div>
+                        <i data-lucide="chevron-down" class="text-gray-500 w-5 h-5 chevron" id="loans-section-chevron"></i>
+                    </button>
+                    
+                    <div id="loans-section" class="expandable-content">
+                        <div class="p-6 pt-0 border-t border-gray-100">
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                                        <div>
+                                            <h4 class="font-semibold text-lg text-gray-800">Business Equipment Loan</h4>
+                                            <p class="text-gray-600">First National Bank</p>
+                                        </div>
+                                        <span class="bg-blue-600 text-white text-sm px-3 py-1 rounded-full mt-2 md:mt-0">
+                                            4.2%
+                                        </span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Original Amount</div>
+                                            <div class="text-lg font-semibold">$500K</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Monthly Payment</div>
+                                            <div class="text-lg font-semibold text-orange-600">$12,800</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Remaining Balance</div>
+                                            <div class="text-lg font-semibold text-red-600">$340K</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                                        <div>
+                                            <h4 class="font-semibold text-lg text-gray-800">Working Capital Line of Credit</h4>
+                                            <p class="text-gray-600">Capital One Business</p>
+                                        </div>
+                                        <span class="bg-blue-600 text-white text-sm px-3 py-1 rounded-full mt-2 md:mt-0">
+                                            6.8%
+                                        </span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Original Amount</div>
+                                            <div class="text-lg font-semibold">$1M</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Monthly Payment</div>
+                                            <div class="text-lg font-semibold text-orange-600">$18,500</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Remaining Balance</div>
+                                            <div class="text-lg font-semibold text-red-600">$750K</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Debts Section -->
+            <section>
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <button onclick="toggleSection('debts-section')" class="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50 rounded-t-xl transition-colors duration-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="file-text" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="text-xl font-semibold text-gray-800">Outstanding Debts & Payables</h3>
+                        </div>
+                        <i data-lucide="chevron-down" class="text-gray-500 w-5 h-5 chevron" id="debts-section-chevron"></i>
+                    </button>
+                    
+                    <div id="debts-section" class="expandable-content">
+                        <div class="p-6 pt-0 border-t border-gray-100">
+                            <div class="space-y-6">
+                                <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500">
+                                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                                        <div>
+                                            <h4 class="font-semibold text-lg text-gray-800">Trade Payable</h4>
+                                            <p class="text-gray-600">Sterling Office Supplies</p>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Total Amount</div>
+                                            <div class="text-lg font-semibold text-red-600">$45K</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Monthly Payment</div>
+                                            <div class="text-lg font-semibold text-orange-600">$15K</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500">
+                                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                                        <div>
+                                            <h4 class="font-semibold text-lg text-gray-800">Business Credit Card</h4>
+                                            <p class="text-gray-600">Corporate Credit Services</p>
+                                        </div>
+                                        <span class="bg-orange-600 text-white text-sm px-3 py-1 rounded-full mt-2 md:mt-0">
+                                            18.9%
+                                        </span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Total Amount</div>
+                                            <div class="text-lg font-semibold text-red-600">$85K</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-gray-500">Monthly Payment</div>
+                                            <div class="text-lg font-semibold text-orange-600">$8,500</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer id="contact" class="bg-gray-900 text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-6">
+                            <i data-lucide="building-2" class="w-8 h-8 text-blue-400"></i>
+                            <div>
+                                <h3 class="text-xl font-bold">Sterling Financial Group</h3>
+                                <p class="text-gray-400">Premium Financial Services</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed">
+                            Leading the way in diversified financial services with a commitment to excellence, 
+                            innovation, and sustainable growth across all business sectors.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6">Contact Information</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="phone" class="w-5 h-5 text-blue-400"></i>
+                                <span class="text-gray-300">+1 (555) 123-4567</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="mail" class="w-5 h-5 text-blue-400"></i>
+                                <span class="text-gray-300">contact@sterlingfg.com</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-blue-400"></i>
+                                <span class="text-gray-300">123 Financial District, New York, NY 10004</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6">Business Hours</h4>
+                        <div class="space-y-2 text-gray-300">
+                            <div>Monday - Friday: 9:00 AM - 6:00 PM</div>
+                            <div>Saturday: 10:00 AM - 2:00 PM</div>
+                            <div>Sunday: Closed</div>
+                        </div>
+                        <div class="mt-6">
+                            <h5 class="font-semibold mb-2">Emergency Contact</h5>
+                            <p class="text-gray-300">24/7 Support: +1 (555) 999-0000</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                    <p class="text-gray-400">
+                        © 2024 Sterling Financial Group. All rights reserved. | Licensed Financial Services Provider
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Toggle expandable sections
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId);
+            const chevron = document.getElementById(sectionId + '-chevron');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                chevron.setAttribute('data-lucide', 'chevron-down');
+            } else {
+                content.classList.add('expanded');
+                chevron.setAttribute('data-lucide', 'chevron-up');
+            }
+            
+            // Refresh icons
+            lucide.createIcons();
+        }
+
+        // Show financial tabs
+        function showTab(business, period) {
+            // Hide all tabs for this business
+            const tabs = document.querySelectorAll(`#${business}-daily, #${business}-monthly, #${business}-annual`);
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(`${business}-${period}`).classList.add('active');
+            
+            // Update button styles
+            const buttons = document.querySelectorAll(`[onclick*="${business}"] .tab-btn`);
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-tab') === period) {
+                    btn.className = 'tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-600 text-white shadow-md';
+                } else {
+                    btn.className = 'tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200';
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>
